@@ -1,0 +1,21 @@
+addi a0, a1, 123 // a0 = a1 + 123
+lw a0, (a1) // a0 = *a1
+sw a0, (a1) // *a1 = a0
+(...) // pointer dereference operator
+li a0, 123 // a0 = 123
+jal ra, <label>
+addi sp, sp, -4 
+sw a0, (sp)
+// stack push
+addi sp, sp, 4
+// stack pop
+M-Mode, S-Mode, U-Mode
+csrr rd, csr // read from csr; rd = csr
+csrw csr, rs // write to csr; csr = rs
+csrrw rd, csr, rs // rd = csr, csr = rs
+sret // return from trap handler
+sfence.vma // clear TLB
+// csr - a register that stores some CPU settings
+
+int value;
+__asm__ __volatile__("csrr %0, sepc" : "=r"(value)); // inline assembly
