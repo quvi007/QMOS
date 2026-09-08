@@ -22,4 +22,8 @@ typedef uint32_t vaddr_t;
 #define va_end __builtin_va_end
 #define va_arg __builtin_va_arg
 
+void *memset(void *buf, char ch, size_t n);
+void *memcpy(void *dst, const void *src, size_t n);
+char *strcpy(char *dst, const char *src);
+int strcmp(const char *str1, const char *str2);
 void printf(const char *fmt, ...);
