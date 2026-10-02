@@ -2,32 +2,33 @@ ENTRY(boot)
 
 SECTIONS {
     . = 0x80200000;
+    __kernel_base = .;
 
-    .text :{ /* program source code */
+    .text :{
         KEEP(*(.text.boot));
         *(.text .text.*);
     }
 
-    .rodata : ALIGN(4) { /* read-only data */
+    .rodata : ALIGN(4) {
         *(.rodata .rodata.*);
     }
 
-    .data : ALIGN(4) { /* initialized data for read-write */
+    .data : ALIGN(4) {
         *(.data .data.*);
     }
 
-    .bss : ALIGN(4) { /* zeroed globals */
-        __bss = .; /* have to keep track of where bss starts */
+    .bss : ALIGN(4) {
+        __bss = .;
         *(.bss .bss.* .sbss .sbss.*);
-        __bss_end = .; /* also keep track of where bss ends */
+        __bss_end = .;
     }
 
     . = ALIGN(4);
-    . += 128 * 1024; /* reserve 128 KB for stack */
-    __stack_top = .; /* point to the stack_top */ 
+    . += 128 * 1024; /* 128KB */
+    __stack_top = .;
 
     . = ALIGN(4096);
     __free_ram = .;
-    . += 64 * 1024 * 1024;
+    . += 64 * 1024 * 1024; /* 64MB */
     __free_ram_end = .;
 }
